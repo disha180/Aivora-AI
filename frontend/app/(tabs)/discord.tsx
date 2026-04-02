@@ -273,16 +273,16 @@ export default function DiscordScreen() {
                       data={prepareChartData(trendData)}
                       width={300}
                       height={200}
-                      color=\"#2563eb\"
+                      color="#2563eb"
                       thickness={3}
-                      startFillColor=\"#2563eb\"
-                      endFillColor=\"#2563eb20\"
+                      startFillColor="#2563eb"
+                      endFillColor="#2563eb20"
                       startOpacity={0.9}
                       endOpacity={0.2}
                       spacing={40}
                       noOfSections={5}
-                      yAxisColor=\"#334155\"
-                      xAxisColor=\"#334155\"
+                      yAxisColor="#334155"
+                      xAxisColor="#334155"
                       yAxisTextStyle={{ color: '#94a3b8' }}
                       xAxisLabelTextStyle={{ color: '#94a3b8', fontSize: 10 }}
                     />
