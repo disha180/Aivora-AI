@@ -190,7 +190,7 @@ export default function PlatformsScreen() {
             style={styles.input}
             value={icon}
             onChangeText={setIcon}
-            placeholder="{'📱'}"
+            placeholder="e.g. 📱"
             placeholderTextColor="#64748b"
           />
 
