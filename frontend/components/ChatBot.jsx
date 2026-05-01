@@ -12,15 +12,9 @@ import {
 import Modal from 'react-native-modal';
 import api from '../utils/api';
 
-interface Message {
-  id: string;
-  text: string;
-  isUser: boolean;
-}
-
 export default function ChatBot() {
   const [isVisible, setIsVisible] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([{
+  const [messages, setMessages] = useState([{
     id: '1',
     text: 'Hi! I\'m your AI assistant. How can I help you today?',
     isUser: false,
@@ -31,7 +25,7 @@ export default function ChatBot() {
   const sendMessage = async () => {
     if (!inputText.trim() || isLoading) return;
 
-    const userMessage: Message = {
+    const userMessage = {
       id: Date.now().toString(),
       text: inputText,
       isUser: true,
@@ -43,14 +37,14 @@ export default function ChatBot() {
 
     try {
       const response = await api.post('/chatbot', { query: inputText });
-      const botMessage: Message = {
+      const botMessage = {
         id: (Date.now() + 1).toString(),
         text: response.data.response,
         isUser: false,
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      const errorMessage: Message = {
+      const errorMessage = {
         id: (Date.now() + 1).toString(),
         text: 'Sorry, I\'m having trouble responding right now.',
         isUser: false,
@@ -67,7 +61,7 @@ export default function ChatBot() {
         style={styles.floatingButton}
         onPress={() => setIsVisible(true)}
       >
-        <Text style={styles.buttonText}>🤖</Text>
+        <Text style={styles.buttonText}>{'🤖'}</Text>
       </TouchableOpacity>
 
       <Modal
@@ -80,7 +74,7 @@ export default function ChatBot() {
           <View style={styles.header}>
             <Text style={styles.headerText}>AI Assistant</Text>
             <TouchableOpacity onPress={() => setIsVisible(false)}>
-              <Text style={styles.closeButton}>✕</Text>
+              <Text style={styles.closeButton}>{'✕'}</Text>
             </TouchableOpacity>
           </View>
 

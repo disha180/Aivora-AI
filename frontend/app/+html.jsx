@@ -1,8 +1,6 @@
-// @ts-nocheck
 import { ScrollViewStyleReset } from "expo-router/html";
-import type { PropsWithChildren } from "react";
 
-export default function Root({ children }: PropsWithChildren) {
+export default function Root({ children }) {
   return (
     <html lang="en" style={{ height: "100%" }}>
       <head>

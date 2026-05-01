@@ -106,7 +106,7 @@ export default function ProfileScreen() {
             style={styles.adminButton}
             onPress={() => router.push('/admin/platforms')}
           >
-            <Text style={styles.adminButtonText}>⚙️ Manage Platforms</Text>
+            <Text style={styles.adminButtonText}>{'⚙️'} Manage Platforms</Text>
           </TouchableOpacity>
         </View>
       )}

@@ -12,31 +12,11 @@ import {
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../../store/authStore';
 import Modal from 'react-native-modal';
-import { LineChart, BarChart } from 'react-native-gifted-charts';
+import { LineChart } from 'react-native-gifted-charts';
 import ChatBot from '../../components/ChatBot';
 import api from '../../utils/api';
 
-interface TrendData {
-  analysis_id: string;
-  platform: string;
-  topic: string;
-  time_period: string;
-  summary: string;
-  instructions: string;
-  examples: string[];
-  chart_data: {
-    labels: string[];
-    values: number[];
-  };
-  stats: {
-    engagement_rate?: string;
-    growth_trend?: string;
-    estimated_reach?: string;
-    peak_time?: string;
-  };
-}
-
-export default function WhatsAppScreen() {
+export default function SpaceXScreen() {
   const router = useRouter();
   const { user, isAuthenticated } = useAuthStore();
   const [showAnalysisModal, setShowAnalysisModal] = useState(false);
@@ -45,8 +25,8 @@ export default function WhatsAppScreen() {
   const [timePeriod, setTimePeriod] = useState('Last 7 days');
   const [additionalRequirements, setAdditionalRequirements] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [trendData, setTrendData] = useState<TrendData | null>(null);
-  const [history, setHistory] = useState<TrendData[]>([]);
+  const [trendData, setTrendData] = useState(null);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -59,7 +39,7 @@ export default function WhatsAppScreen() {
   const loadHistory = async () => {
     try {
       const response = await api.get('/trends/history');
-      setHistory(response.data.filter((item: TrendData) => item.platform === 'WhatsApp'));
+      setHistory(response.data.filter((item) => item.platform === 'SpaceX'));
     } catch (error) {
       console.error('Error loading history:', error);
     }
@@ -74,7 +54,7 @@ export default function WhatsAppScreen() {
     setIsAnalyzing(true);
     try {
       const response = await api.post('/trends/analyze', {
-        platform: 'WhatsApp',
+        platform: 'SpaceX',
         topic,
         time_period: timePeriod,
         additional_requirements: additionalRequirements,
@@ -84,7 +64,7 @@ export default function WhatsAppScreen() {
       setShowAnalysisModal(false);
       setShowResultsModal(true);
       loadHistory();
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert(
         'Analysis Failed',
         error.response?.data?.detail || 'An error occurred'
@@ -94,7 +74,7 @@ export default function WhatsAppScreen() {
     }
   };
 
-  const prepareChartData = (data: TrendData) => {
+  const prepareChartData = (data) => {
     if (!data.chart_data || !data.chart_data.values) {
       return [];
     }
@@ -109,10 +89,10 @@ export default function WhatsAppScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.headerIcon}>💬</Text>
-          <Text style={styles.headerTitle}>WhatsApp Trends</Text>
+          <Text style={styles.headerIcon}>{'🚀'}</Text>
+          <Text style={styles.headerTitle}>SpaceX Trends</Text>
           <Text style={styles.headerSubtitle}>
-            Discover what's trending on WhatsApp
+            Discover what&apos;s trending on SpaceX
           </Text>
         </View>
 
@@ -129,7 +109,7 @@ export default function WhatsAppScreen() {
             <View style={styles.emptyState}>
               <Text style={styles.emptyText}>No analyses yet</Text>
               <Text style={styles.emptySubtext}>
-                Tap "Analyze New Trend" to get started
+                Tap &quot;Analyze New Trend&quot; to get started
               </Text>
             </View>
           ) : (
@@ -161,7 +141,7 @@ export default function WhatsAppScreen() {
         style={styles.modal}
       >
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Analyze WhatsApp Trend</Text>
+          <Text style={styles.modalTitle}>Analyze SpaceX Trend</Text>
 
           <Text style={styles.label}>Topic / Keyword</Text>
           <TextInput

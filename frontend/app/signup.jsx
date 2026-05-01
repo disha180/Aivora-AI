@@ -45,7 +45,7 @@ export default function Signup() {
       setUser(response.data.user);
       setToken(response.data.access_token);
       router.replace('/(tabs)/instagram');
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert(
         'Signup Failed',
         error.response?.data?.detail || 'An error occurred'
@@ -155,7 +155,7 @@ export default function Signup() {
           onPress={() => router.push('/login')}
         >
           <Text style={styles.linkText}>
-            Already have an account? <Text style={styles.linkBold}>Log In</Text>
+            {"Already have an account? "}<Text style={styles.linkBold}>Log In</Text>
           </Text>
         </TouchableOpacity>
       </ScrollView>

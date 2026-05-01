@@ -12,29 +12,9 @@ import {
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../../store/authStore';
 import Modal from 'react-native-modal';
-import { LineChart, BarChart } from 'react-native-gifted-charts';
+import { LineChart } from 'react-native-gifted-charts';
 import ChatBot from '../../components/ChatBot';
 import api from '../../utils/api';
-
-interface TrendData {
-  analysis_id: string;
-  platform: string;
-  topic: string;
-  time_period: string;
-  summary: string;
-  instructions: string;
-  examples: string[];
-  chart_data: {
-    labels: string[];
-    values: number[];
-  };
-  stats: {
-    engagement_rate?: string;
-    growth_trend?: string;
-    estimated_reach?: string;
-    peak_time?: string;
-  };
-}
 
 export default function FacebookScreen() {
   const router = useRouter();
@@ -45,8 +25,8 @@ export default function FacebookScreen() {
   const [timePeriod, setTimePeriod] = useState('Last 7 days');
   const [additionalRequirements, setAdditionalRequirements] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [trendData, setTrendData] = useState<TrendData | null>(null);
-  const [history, setHistory] = useState<TrendData[]>([]);
+  const [trendData, setTrendData] = useState(null);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -59,7 +39,7 @@ export default function FacebookScreen() {
   const loadHistory = async () => {
     try {
       const response = await api.get('/trends/history');
-      setHistory(response.data.filter((item: TrendData) => item.platform === 'Facebook'));
+      setHistory(response.data.filter((item) => item.platform === 'Facebook'));
     } catch (error) {
       console.error('Error loading history:', error);
     }
@@ -84,7 +64,7 @@ export default function FacebookScreen() {
       setShowAnalysisModal(false);
       setShowResultsModal(true);
       loadHistory();
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert(
         'Analysis Failed',
         error.response?.data?.detail || 'An error occurred'
@@ -94,7 +74,7 @@ export default function FacebookScreen() {
     }
   };
 
-  const prepareChartData = (data: TrendData) => {
+  const prepareChartData = (data) => {
     if (!data.chart_data || !data.chart_data.values) {
       return [];
     }
@@ -109,10 +89,10 @@ export default function FacebookScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.headerIcon}>👥</Text>
+          <Text style={styles.headerIcon}>{'👥'}</Text>
           <Text style={styles.headerTitle}>Facebook Trends</Text>
           <Text style={styles.headerSubtitle}>
-            Discover what's trending on Facebook
+            Discover what&apos;s trending on Facebook
           </Text>
         </View>
 
@@ -129,7 +109,7 @@ export default function FacebookScreen() {
             <View style={styles.emptyState}>
               <Text style={styles.emptyText}>No analyses yet</Text>
               <Text style={styles.emptySubtext}>
-                Tap "Analyze New Trend" to get started
+                Tap &quot;Analyze New Trend&quot; to get started
               </Text>
             </View>
           ) : (

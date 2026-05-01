@@ -36,7 +36,7 @@ export default function Login() {
       setUser(response.data.user);
       setToken(response.data.access_token);
       router.replace('/(tabs)/instagram');
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert(
         'Login Failed',
         error.response?.data?.detail || 'An error occurred'
@@ -109,7 +109,7 @@ export default function Login() {
           onPress={() => router.push('/signup')}
         >
           <Text style={styles.linkText}>
-            Don't have an account? <Text style={styles.linkBold}>Sign Up</Text>
+            {"Don't have an account? "}<Text style={styles.linkBold}>Sign Up</Text>
           </Text>
         </TouchableOpacity>
       </View>

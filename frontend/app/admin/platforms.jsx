@@ -14,21 +14,13 @@ import { useAuthStore } from '../../store/authStore';
 import Modal from 'react-native-modal';
 import api from '../../utils/api';
 
-interface Platform {
-  platform_id: string;
-  name: string;
-  icon: string;
-  description: string;
-  is_active: boolean;
-}
-
 export default function PlatformsScreen() {
   const router = useRouter();
   const { user } = useAuthStore();
-  const [platforms, setPlatforms] = useState<Platform[]>([]);
+  const [platforms, setPlatforms] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingPlatform, setEditingPlatform] = useState<Platform | null>(null);
+  const [editingPlatform, setEditingPlatform] = useState(null);
   const [name, setName] = useState('');
   const [icon, setIcon] = useState('');
   const [description, setDescription] = useState('');
@@ -61,7 +53,7 @@ export default function PlatformsScreen() {
     setShowModal(true);
   };
 
-  const handleEdit = (platform: Platform) => {
+  const handleEdit = (platform) => {
     setEditingPlatform(platform);
     setName(platform.name);
     setIcon(platform.icon);
@@ -92,14 +84,14 @@ export default function PlatformsScreen() {
       }
       setShowModal(false);
       loadPlatforms();
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert('Error', error.response?.data?.detail || 'Failed to save platform');
     } finally {
       setIsSaving(false);
     }
   };
 
-  const handleDelete = (platform: Platform) => {
+  const handleDelete = (platform) => {
     Alert.alert(
       'Delete Platform',
       `Are you sure you want to delete ${platform.name}?`,
@@ -112,7 +104,7 @@ export default function PlatformsScreen() {
             try {
               await api.delete(`/platforms/${platform.platform_id}`);
               loadPlatforms();
-            } catch (error: any) {
+            } catch (error) {
               Alert.alert('Error', error.response?.data?.detail || 'Failed to delete platform');
             }
           },
@@ -136,7 +128,7 @@ export default function PlatformsScreen() {
           onPress={() => router.back()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}>← Back</Text>
+          <Text style={styles.backButtonText}>{'← Back'}</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Manage Platforms</Text>
         <TouchableOpacity
@@ -198,7 +190,7 @@ export default function PlatformsScreen() {
             style={styles.input}
             value={icon}
             onChangeText={setIcon}
-            placeholder="📱"
+            placeholder="{'📱'}"
             placeholderTextColor="#64748b"
           />
 

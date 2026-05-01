@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -44,7 +43,7 @@ export default function LandingPage() {
         <Text style={styles.featuresTitle}>Why Aivora AI?</Text>
 
         <View style={styles.featureCard}>
-          <Text style={styles.featureIcon}>📊</Text>
+          <Text style={styles.featureIcon}>{'📊'}</Text>
           <Text style={styles.featureTitle}>Real-Time Analytics</Text>
           <Text style={styles.featureDescription}>
             Get instant insights with graphs, charts, and detailed statistics
@@ -52,7 +51,7 @@ export default function LandingPage() {
         </View>
 
         <View style={styles.featureCard}>
-          <Text style={styles.featureIcon}>🤖</Text>
+          <Text style={styles.featureIcon}>{'🤖'}</Text>
           <Text style={styles.featureTitle}>AI-Powered Insights</Text>
           <Text style={styles.featureDescription}>
             Leverage advanced AI to understand trends and get actionable recommendations
@@ -60,7 +59,7 @@ export default function LandingPage() {
         </View>
 
         <View style={styles.featureCard}>
-          <Text style={styles.featureIcon}>🌐</Text>
+          <Text style={styles.featureIcon}>{'🌐'}</Text>
           <Text style={styles.featureTitle}>Multi-Platform Support</Text>
           <Text style={styles.featureDescription}>
             Analyze trends across all major social media platforms in one place
@@ -68,7 +67,7 @@ export default function LandingPage() {
         </View>
 
         <View style={styles.featureCard}>
-          <Text style={styles.featureIcon}>💬</Text>
+          <Text style={styles.featureIcon}>{'💬'}</Text>
           <Text style={styles.featureTitle}>24/7 AI Assistant</Text>
           <Text style={styles.featureDescription}>
             Get help anytime with our intelligent chatbot assistant
@@ -76,7 +75,7 @@ export default function LandingPage() {
         </View>
 
         <View style={styles.featureCard}>
-          <Text style={styles.featureIcon}>🛡️</Text>
+          <Text style={styles.featureIcon}>{'🛡️'}</Text>
           <Text style={styles.featureTitle}>Safe & Ethical</Text>
           <Text style={styles.featureDescription}>
             All content is filtered for safety and ethical standards
